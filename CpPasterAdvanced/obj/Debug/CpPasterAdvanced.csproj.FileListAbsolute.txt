@@ -1,0 +1,11 @@
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\CpPasterAdvanced.exe.config
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\CpPasterAdvanced.exe
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\CpPasterAdvanced.pdb
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\SQLite.NET.dll
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.csprojResolveAssemblyReference.cache
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.EditPasterForm.resources
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.Form1.resources
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.Properties.Resources.resources
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.csproj.GenerateResource.Cache
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.exe
+C:\Users\Nikola\documents\visual studio 2013\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.pdb

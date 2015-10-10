@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using Finisar.SQLite;
+
+namespace CpPasterAdvanced
+{
+    public partial class Form1 : Form
+    {
+        public static int top = 50;
+        public Form1()
+        {
+            
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            #region SQL Code for first time use
+            //// We use these three SQLite objects:
+
+            //SQLiteConnection sqlite_conn;
+
+            //SQLiteCommand sqlite_cmd;
+
+            //SQLiteDataReader sqlite_datareader;
+
+
+
+            //// create a new database connection:
+
+            //sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+
+
+
+            //// open the connection:
+
+            //sqlite_conn.Open();
+
+
+
+            //// create a new SQL command:
+
+            //sqlite_cmd = sqlite_conn.CreateCommand();
+
+
+
+            //// Let the SQLiteCommand object know our SQL-Query:
+
+            //sqlite_cmd.CommandText = "CREATE TABLE PasterData (id integer primary key, buttonName text character(20), dataToPaste BLOB);";
+
+
+
+            //// Now lets execute the SQL ;D
+
+            //sqlite_cmd.ExecuteNonQuery();
+
+
+
+            //// Lets insert something into our new table:
+
+            //sqlite_cmd.CommandText = "INSERT INTO PasterData (id, buttonName, dataToPaste) VALUES (1, 'Test', 'Text 1111111');";
+
+
+
+            //// And execute this again ;D
+
+            //sqlite_cmd.ExecuteNonQuery();
+
+
+
+
+
+
+            //// But how do we read something out of our table ?
+
+            //// First lets build a SQL-Query again:
+
+            //sqlite_cmd.CommandText = "SELECT * FROM PasterData";
+
+
+
+            //// Now the SQLiteCommand object can give us a DataReader-Object:
+
+            //sqlite_datareader = sqlite_cmd.ExecuteReader();
+
+
+
+            //// The SQLiteDataReader allows us to run through the result lines:
+
+            //while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            //{
+
+            //    // Print out the content of the text field:
+
+            //    //System.Console.WriteLine( sqlite_datareader["text"] );
+
+
+
+            //    string myreader = sqlite_datareader.GetString(0);
+
+            //    MessageBox.Show(myreader);
+
+            //}
+
+            //// We are ready, now lets cleanup and close our connection:
+
+            //sqlite_conn.Close(); 
+            #endregion
+
+            EditPasterForm epf = new EditPasterForm();
+            epf.Show();
+        }
+        
+
+    }
+}
