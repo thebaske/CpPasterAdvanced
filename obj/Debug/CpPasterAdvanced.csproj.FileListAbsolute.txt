@@ -18,3 +18,4 @@ D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdva
 D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.csproj.GenerateResource.Cache
 D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.exe
 D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.pdb
+D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.csprojResolveAssemblyReference.cache

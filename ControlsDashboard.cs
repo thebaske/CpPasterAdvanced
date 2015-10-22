@@ -40,12 +40,12 @@ namespace CpPasterAdvanced
         //pasteData( as actual data to be pasted from the clipboard)
         public void InsertIntoDb(string btnName, string pasteData)
         {
-            StringBuilder commandInsert = new StringBuilder();
-            commandInsert.Append("INSERT INTO PasterData (id, buttonName, dataToPaste) VALUES (" + _idNumber + "," + " '" + btnName + "'," + " '" + pasteData + "');");
+            StringBuilder commandString = new StringBuilder();
+            commandString.Append("INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('" + btnName + "'," + " '" + pasteData + "');");
             sqlite_connection.Open();
             SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
-            sqlite_command.CommandText = commandInsert.ToString();
-            //"INSERT INTO PasterData (id, buttonName, dataToPaste) VALUES (1, 'btnName', 'Text 1111111');";
+            sqlite_command.CommandText = commandString.ToString();
+            //"INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('btnName', 'Text 1111111');";
             sqlite_command.ExecuteNonQuery();
             sqlite_connection.Close();
         }
