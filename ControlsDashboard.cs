@@ -39,10 +39,10 @@ namespace CpPasterAdvanced
         }
         //Inserts records with provided btnName(as name for the button or list Item) and
         //pasteData( as actual data to be pasted from the clipboard)
-        public void InsertIntoDb(string btnName, string pasteData)
+        public void InsertIntoDb(string Name, string pasteData)
         {
             StringBuilder commandString = new StringBuilder();
-            commandString.Append("INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('" + btnName + "'," + " '" + pasteData + "');");
+            commandString.Append("INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('" + Name + "'," + " '" + pasteData + "');");
             sqlite_connection.Open();
             SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
             sqlite_command.CommandText = commandString.ToString();
@@ -61,23 +61,33 @@ namespace CpPasterAdvanced
             SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
             sqlite_command.CommandText = command;
             sqlite_datareader = sqlite_command.ExecuteReader();
-            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            try
             {
-                string btnNameReader = sqlite_datareader.GetString(0);
-                string pasterDataReader = sqlite_datareader.GetString(1);
-                dataItems.Add(btnNameReader, pasterDataReader);
+                while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                {
+                    string btnNameReader = sqlite_datareader.GetString(0);
+                    string pasterDataReader = sqlite_datareader.GetString(1);
+                    dataItems.Add(btnNameReader, pasterDataReader);
+                }
             }
-            sqlite_connection.Close();
+            catch (Exception)
+            {
+
+                MessageBox.Show("The database is empty");
+            }
+            finally { sqlite_connection.Close(); }
             return dataItems;
         }
        
-        public void DeleteRecords(string btnName)
+        public void DeleteRecords(string Name)
         {
-            //StringBuilder deleteString = new StringBuilder();
-            //deleteString.Append("DELETE FROM PasterData WHERE buttonName = '"+ btnName +"';");
-            //sqlite_cmd.CommandText = deleteString.ToString();
-            //ConnectionControl("Open");
-            //sqlite_datareader = sqlite_cmd.ExecuteReader();
+            StringBuilder deleteString = new StringBuilder();
+            deleteString.Append("DELETE FROM PasterData WHERE id_Name = '" + Name + "';");
+            sqlite_connection.Open();
+            SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
+            sqlite_command.CommandText = deleteString.ToString();
+            sqlite_datareader = sqlite_command.ExecuteReader();
+            sqlite_connection.Close();
         }
     }
 }

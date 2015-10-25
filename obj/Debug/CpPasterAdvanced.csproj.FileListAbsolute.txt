@@ -26,4 +26,3 @@ D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\System.Data.
 D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\EntityFramework.xml
 D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\EntityFramework.SqlServer.xml
 D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\bin\Debug\System.Data.SQLite.xml
-D:\Programming\Projects\CpPasterAdvanced\CpPasterAdvanced\obj\Debug\CpPasterAdvanced.csprojResolveAssemblyReference.cache
