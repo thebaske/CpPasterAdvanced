@@ -130,7 +130,7 @@ namespace CpPasterAdvanced
             EditPasterForm epf = new EditPasterForm();
             epf.Show();
         }
-
+        //Delete items
         private void buttonDeleteDropboxItem_Click(object sender, EventArgs e)
         {
             DialogResult ResultChoice = MessageBox.Show("Think again?", "Really want that?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
