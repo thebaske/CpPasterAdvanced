@@ -48,17 +48,17 @@
             // 
             // btnCreateEditForm
             // 
-            this.btnCreateEditForm.Location = new System.Drawing.Point(579, 26);
+            this.btnCreateEditForm.Location = new System.Drawing.Point(802, 54);
             this.btnCreateEditForm.Name = "btnCreateEditForm";
             this.btnCreateEditForm.Size = new System.Drawing.Size(75, 23);
             this.btnCreateEditForm.TabIndex = 3;
             this.btnCreateEditForm.Text = "Create";
             this.btnCreateEditForm.UseVisualStyleBackColor = true;
-            this.btnCreateEditForm.Click += new System.EventHandler(this.button1_Click);
+            this.btnCreateEditForm.Click += new System.EventHandler(this.CreateRecord_click);
             // 
             // btnCancelEditForm
             // 
-            this.btnCancelEditForm.Location = new System.Drawing.Point(579, 84);
+            this.btnCancelEditForm.Location = new System.Drawing.Point(802, 112);
             this.btnCancelEditForm.Name = "btnCancelEditForm";
             this.btnCancelEditForm.Size = new System.Drawing.Size(75, 23);
             this.btnCancelEditForm.TabIndex = 4;
@@ -93,7 +93,7 @@
             this.PasterRecordsDataGrid.Name = "PasterRecordsDataGrid";
             this.PasterRecordsDataGrid.ReadOnly = true;
             this.PasterRecordsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.PasterRecordsDataGrid.Size = new System.Drawing.Size(245, 163);
+            this.PasterRecordsDataGrid.Size = new System.Drawing.Size(245, 349);
             this.PasterRecordsDataGrid.TabIndex = 4;
             this.PasterRecordsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PasterRecordsDataGrid_CellContentClick);
             // 
@@ -120,7 +120,7 @@
             // 
             this.richTextBoxDataTopaste.Location = new System.Drawing.Point(268, 54);
             this.richTextBoxDataTopaste.Name = "richTextBoxDataTopaste";
-            this.richTextBoxDataTopaste.Size = new System.Drawing.Size(305, 135);
+            this.richTextBoxDataTopaste.Size = new System.Drawing.Size(528, 323);
             this.richTextBoxDataTopaste.TabIndex = 2;
             this.richTextBoxDataTopaste.Text = "";
             // 
@@ -128,8 +128,9 @@
             // 
             this.textBoxNamePaste.Location = new System.Drawing.Point(268, 28);
             this.textBoxNamePaste.Name = "textBoxNamePaste";
-            this.textBoxNamePaste.Size = new System.Drawing.Size(171, 20);
+            this.textBoxNamePaste.Size = new System.Drawing.Size(291, 20);
             this.textBoxNamePaste.TabIndex = 1;
+            this.textBoxNamePaste.TextChanged += new System.EventHandler(this.textBoxNamePaste_TextChanged);
             // 
             // label2
             // 
@@ -143,7 +144,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(500, 35);
+            this.label3.Location = new System.Drawing.Point(725, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 8;
@@ -151,19 +152,19 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(579, 55);
+            this.button1.Location = new System.Drawing.Point(802, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "Delete";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.DeleteRecord_click);
             // 
             // EditPasterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 201);
+            this.ClientSize = new System.Drawing.Size(889, 388);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

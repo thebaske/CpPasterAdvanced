@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Data.SQLite;
 
 namespace CpPasterAdvanced
-{//TODO: Make try catch blocks around critical areas
+{//TODO: Make try catch blocks around critical areas, and solve the problem when inserting newline and slash!!! That is no good!!!
     public class ControlsDashboard
     {
         private static int _count = 0;
@@ -98,16 +98,16 @@ namespace CpPasterAdvanced
             catch (Exception)
             {
 
-                MessageBox.Show("The database is empty");
+                MessageBox.Show("There is no such record!!");
             }
             finally { sqlite_connection.Close(); }
             return resultQuery;
         }
        
-        public void DeleteRecords(string Name)
+        public void DeleteRecords(string Data)
         {
             StringBuilder deleteString = new StringBuilder();
-            deleteString.Append("DELETE FROM PasterData WHERE id_Name = '" + Name + "';");
+            deleteString.Append("DELETE FROM PasterData WHERE DataToPaste = '" + Data + "';");
             sqlite_connection.Open();
             SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
             sqlite_command.CommandText = deleteString.ToString();
