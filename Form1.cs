@@ -133,12 +133,7 @@ namespace CpPasterAdvanced
         //Delete items
         private void buttonDeleteDropboxItem_Click(object sender, EventArgs e)
         {
-            DialogResult ResultChoice = MessageBox.Show("Think again?", "Really want that?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (ResultChoice == DialogResult.Yes)
-            {
-                LoadDataToList.DeleteRecords(ListBoxDataNames.SelectedItem.ToString());
-            }
-            LoadDataToListbox();
+            
             
 
         }

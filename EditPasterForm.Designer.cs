@@ -41,6 +41,7 @@
             this.textBoxNamePaste = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sQLiteTransactionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasterRecordsDataGrid)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +51,7 @@
             this.btnCreateEditForm.Location = new System.Drawing.Point(579, 26);
             this.btnCreateEditForm.Name = "btnCreateEditForm";
             this.btnCreateEditForm.Size = new System.Drawing.Size(75, 23);
-            this.btnCreateEditForm.TabIndex = 1;
+            this.btnCreateEditForm.TabIndex = 3;
             this.btnCreateEditForm.Text = "Create";
             this.btnCreateEditForm.UseVisualStyleBackColor = true;
             this.btnCreateEditForm.Click += new System.EventHandler(this.button1_Click);
@@ -60,7 +61,7 @@
             this.btnCancelEditForm.Location = new System.Drawing.Point(579, 84);
             this.btnCancelEditForm.Name = "btnCancelEditForm";
             this.btnCancelEditForm.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelEditForm.TabIndex = 2;
+            this.btnCancelEditForm.TabIndex = 4;
             this.btnCancelEditForm.Text = "Cancel";
             this.btnCancelEditForm.UseVisualStyleBackColor = true;
             this.btnCancelEditForm.Click += new System.EventHandler(this.btnCancelEditForm_Click);
@@ -88,10 +89,13 @@
             this.Paster_Name,
             this.Paster_Data});
             this.PasterRecordsDataGrid.Location = new System.Drawing.Point(16, 28);
+            this.PasterRecordsDataGrid.MultiSelect = false;
             this.PasterRecordsDataGrid.Name = "PasterRecordsDataGrid";
             this.PasterRecordsDataGrid.ReadOnly = true;
+            this.PasterRecordsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.PasterRecordsDataGrid.Size = new System.Drawing.Size(245, 163);
             this.PasterRecordsDataGrid.TabIndex = 4;
+            this.PasterRecordsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PasterRecordsDataGrid_CellContentClick);
             // 
             // Paster_ID
             // 
@@ -117,7 +121,7 @@
             this.richTextBoxDataTopaste.Location = new System.Drawing.Point(268, 54);
             this.richTextBoxDataTopaste.Name = "richTextBoxDataTopaste";
             this.richTextBoxDataTopaste.Size = new System.Drawing.Size(305, 135);
-            this.richTextBoxDataTopaste.TabIndex = 5;
+            this.richTextBoxDataTopaste.TabIndex = 2;
             this.richTextBoxDataTopaste.Text = "";
             // 
             // textBoxNamePaste
@@ -125,7 +129,7 @@
             this.textBoxNamePaste.Location = new System.Drawing.Point(268, 28);
             this.textBoxNamePaste.Name = "textBoxNamePaste";
             this.textBoxNamePaste.Size = new System.Drawing.Size(171, 20);
-            this.textBoxNamePaste.TabIndex = 6;
+            this.textBoxNamePaste.TabIndex = 1;
             // 
             // label2
             // 
@@ -145,11 +149,22 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Data to paste";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(579, 55);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Delete";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // EditPasterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 201);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxNamePaste);
@@ -181,5 +196,6 @@
         private System.Windows.Forms.TextBox textBoxNamePaste;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
     }
 }
