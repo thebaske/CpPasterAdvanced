@@ -18,9 +18,17 @@ namespace CpPasterAdvanced
         public EditPasterForm()
         {
             InitializeComponent();
-            foreach (KeyValuePair<string,string> pasteData in ControlToDatabaseFunctions.SelectRecords())
+            LoadDataToGridView();
+        }
+
+        public void LoadDataToGridView()
+        {
+            richTextBoxDataTopaste.Clear();
+            textBoxNamePaste.Clear();
+            PasterRecordsDataGrid.Rows.Clear();
+            foreach (KeyValuePair<string, string> pasteData in ControlToDatabaseFunctions.SelectRecords())
             {
-                DataGridPasterRecords.Rows.Add(pasteData.Key, pasteData.Value);
+                PasterRecordsDataGrid.Rows.Add(pasteData.Key, pasteData.Value);
             }
         }
 
@@ -28,6 +36,7 @@ namespace CpPasterAdvanced
         {
             
             ControlToDatabaseFunctions.InsertIntoDb(textBoxNamePaste.Text, richTextBoxDataTopaste.Text);
+            LoadDataToGridView();
         }
 
         private void btnCancelEditForm_Click(object sender, EventArgs e)

@@ -139,7 +139,14 @@ namespace CpPasterAdvanced
                 LoadDataToList.DeleteRecords(ListBoxDataNames.SelectedItem.ToString());
             }
             LoadDataToListbox();
+            
 
+        }
+
+        private void ListBoxDataNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            Clipboard.SetText(LoadDataToList.SelectOneRecord(ListBoxDataNames.SelectedItem.ToString()));
         }
     }
 }

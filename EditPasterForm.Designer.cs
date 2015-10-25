@@ -33,7 +33,7 @@
             this.btnCancelEditForm = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.sQLiteTransactionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.DataGridPasterRecords = new System.Windows.Forms.DataGridView();
+            this.PasterRecordsDataGrid = new System.Windows.Forms.DataGridView();
             this.Paster_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Paster_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Paster_Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,7 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sQLiteTransactionBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridPasterRecords)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PasterRecordsDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCreateEditForm
@@ -78,20 +78,20 @@
             // 
             this.sQLiteTransactionBindingSource.DataSource = typeof(Finisar.SQLite.SQLiteTransaction);
             // 
-            // DataGridPasterRecords
+            // PasterRecordsDataGrid
             // 
-            this.DataGridPasterRecords.AllowUserToAddRows = false;
-            this.DataGridPasterRecords.AllowUserToDeleteRows = false;
-            this.DataGridPasterRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridPasterRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PasterRecordsDataGrid.AllowUserToAddRows = false;
+            this.PasterRecordsDataGrid.AllowUserToDeleteRows = false;
+            this.PasterRecordsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PasterRecordsDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Paster_ID,
             this.Paster_Name,
             this.Paster_Data});
-            this.DataGridPasterRecords.Location = new System.Drawing.Point(16, 28);
-            this.DataGridPasterRecords.Name = "DataGridPasterRecords";
-            this.DataGridPasterRecords.ReadOnly = true;
-            this.DataGridPasterRecords.Size = new System.Drawing.Size(245, 163);
-            this.DataGridPasterRecords.TabIndex = 4;
+            this.PasterRecordsDataGrid.Location = new System.Drawing.Point(16, 28);
+            this.PasterRecordsDataGrid.Name = "PasterRecordsDataGrid";
+            this.PasterRecordsDataGrid.ReadOnly = true;
+            this.PasterRecordsDataGrid.Size = new System.Drawing.Size(245, 163);
+            this.PasterRecordsDataGrid.TabIndex = 4;
             // 
             // Paster_ID
             // 
@@ -154,14 +154,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxNamePaste);
             this.Controls.Add(this.richTextBoxDataTopaste);
-            this.Controls.Add(this.DataGridPasterRecords);
+            this.Controls.Add(this.PasterRecordsDataGrid);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancelEditForm);
             this.Controls.Add(this.btnCreateEditForm);
             this.Name = "EditPasterForm";
             this.Text = "EditPasterForm";
             ((System.ComponentModel.ISupportInitialize)(this.sQLiteTransactionBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridPasterRecords)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PasterRecordsDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,7 +173,7 @@
         private System.Windows.Forms.Button btnCancelEditForm;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource sQLiteTransactionBindingSource;
-        private System.Windows.Forms.DataGridView DataGridPasterRecords;
+        private System.Windows.Forms.DataGridView PasterRecordsDataGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Paster_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Paster_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Paster_Data;

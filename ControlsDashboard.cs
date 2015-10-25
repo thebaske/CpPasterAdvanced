@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Data.SQLite;
 
 namespace CpPasterAdvanced
-{
+{//TODO: Make try catch blocks around critical areas
     public class ControlsDashboard
     {
         private static int _count = 0;
@@ -77,6 +77,31 @@ namespace CpPasterAdvanced
             }
             finally { sqlite_connection.Close(); }
             return dataItems;
+        }
+
+        public string SelectOneRecord(string queryWord)
+        {
+            string resultQuery = "";
+            StringBuilder commandString = new StringBuilder();
+            commandString.Append("SELECT * FROM PasterData WHERE id_Name = '" + queryWord + "';");
+            sqlite_connection.Open();
+            SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
+            sqlite_command.CommandText = commandString.ToString();
+            sqlite_datareader = sqlite_command.ExecuteReader();
+            try
+            {
+                while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                {
+                    resultQuery = sqlite_datareader.GetString(1);
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("The database is empty");
+            }
+            finally { sqlite_connection.Close(); }
+            return resultQuery;
         }
        
         public void DeleteRecords(string Name)
