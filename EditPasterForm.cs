@@ -14,14 +14,19 @@ namespace CpPasterAdvanced
 {
     public partial class EditPasterForm : Form
     {
+        ControlsDashboard ControlToDatabaseFunctions = new ControlsDashboard();
         public EditPasterForm()
         {
             InitializeComponent();
+            foreach (KeyValuePair<string,string> pasteData in ControlToDatabaseFunctions.SelectRecords())
+            {
+                DataGridPasterRecords.Rows.Add(pasteData.Key, pasteData.Value);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ControlsDashboard ControlToDatabaseFunctions = new ControlsDashboard();
+            
             ControlToDatabaseFunctions.InsertIntoDb(textBoxNamePaste.Text, richTextBoxDataTopaste.Text);
         }
 
