@@ -18,7 +18,7 @@ namespace CpPasterAdvanced
         private SQLiteCommand sqlite_command = new SQLiteCommand();
         SQLiteDataReader sqlite_datareader;
         
-
+        //TODO: stil not saving next line
         
         public void CountRecords()
         {
@@ -41,14 +41,46 @@ namespace CpPasterAdvanced
         //pasteData( as actual data to be pasted from the clipboard)
         public void InsertIntoDb(string Name, string pasteData)
         {
+            string pasterTextData = SearchStringForNewLint(pasteData);
             StringBuilder commandString = new StringBuilder();
-            commandString.Append("INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('" + Name + "'," + " '" + pasteData + "');");
+            commandString.Append(@"INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('" + @Name + "'," + "'" + pasterTextData + "');");
             sqlite_connection.Open();
             SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
             sqlite_command.CommandText = commandString.ToString();
             //"INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('btnName', 'Text 1111111');";
             sqlite_command.ExecuteNonQuery();
             sqlite_connection.Close();
+        }
+
+        private string SearchStringForNewLint(string searchNewLine)
+        {
+            StringBuilder sqlStringWithNewLine = new StringBuilder();
+            string[] lettersToArray = new string[searchNewLine.Length];
+            int a = 0;
+            foreach (char letter in searchNewLine)
+            {
+                
+                lettersToArray[a] = letter.ToString();
+                a++;
+            }
+            for (int i = 0; i < lettersToArray.Length; i++)
+            {
+                if (lettersToArray[i] == "\n")
+                {
+                    lettersToArray[i] = "'char(10)'";
+                    //for (int j = i+1;  j < lettersToArray.Length ;  j++)
+                    //{
+                    //    lettersToArray[j] = lettersToArray[j + 1];
+                        
+                    //}
+                }
+                
+            }
+            foreach (var arrayItem in lettersToArray)
+            {
+                sqlStringWithNewLine.Append(arrayItem);
+            }
+            return sqlStringWithNewLine.ToString();
         }
         //Returns Dictionary with two strings( button Name , and data to be pasted
         //From which we can populate any type of the control.

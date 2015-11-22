@@ -15,19 +15,19 @@ namespace CpPasterAdvanced
     public partial class Form1 : Form
     {
 
-        ControlsDashboard LoadDataToList = new ControlsDashboard();
+        ControlsDashboard DataFromDatabaseToList = new ControlsDashboard();
         public Form1()
         {
             
             InitializeComponent();
-            LoadDataToListbox();
+            LoadDataToDropDownControl();
 
         }
 
-        public void LoadDataToListbox()
+        public void LoadDataToDropDownControl()
         {
             ListBoxDataNames.Items.Clear();
-            foreach (var DataName in LoadDataToList.SelectRecords())
+            foreach (var DataName in DataFromDatabaseToList.SelectRecords())
             {
                 ListBoxDataNames.Items.Add(DataName.Key.ToString());
             }
@@ -129,19 +129,19 @@ namespace CpPasterAdvanced
 
             EditPasterForm epf = new EditPasterForm();
             epf.Show();
+            LoadDataToDropDownControl();
         }
         //Delete items
-        private void buttonDeleteDropboxItem_Click(object sender, EventArgs e)
-        {
+        //private void buttonDeleteDropboxItem_Click(object sender, EventArgs e)
+        //{
             
             
 
-        }
+        //}
 
         private void ListBoxDataNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            Clipboard.SetText(LoadDataToList.SelectOneRecord(ListBoxDataNames.SelectedItem.ToString()));
+            Clipboard.SetText(DataFromDatabaseToList.SelectOneRecord(ListBoxDataNames.SelectedItem.ToString()));
         }
     }
 }
