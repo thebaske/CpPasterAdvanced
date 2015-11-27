@@ -17,10 +17,14 @@ namespace CpPasterAdvanced
         private SQLiteConnection sqlite_connection = new SQLiteConnection("Data Source=PasterDatabase.db;Version=3;New=True;Compress=True;");
         private SQLiteCommand sqlite_command = new SQLiteCommand();
         SQLiteDataReader sqlite_datareader;
-        
-        //TODO: stil not saving next line
-        //TODO: Make check on focus lost for name field, must be unique
-        
+
+
+        //TODO: improve focus lost checking
+        //TODO: Consider making the database with unique index key!! so you can delete an item based on table selection/ or 
+        //TODO: change the delete method to accept string from the grid.
+        //TODO: Make delete button dissapear when nothing is selected/ or make it read delete parameter from the grid.
+        //TODO: Make append/change function.
+
         public void CountRecords()
         {
             string command = "SELECT * FROM PasterData";

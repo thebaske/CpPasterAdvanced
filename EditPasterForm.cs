@@ -19,6 +19,7 @@ namespace CpPasterAdvanced
         {
             InitializeComponent();
             LoadDataToGridView();
+            
         }
 
         public void LoadDataToGridView()

@@ -61,7 +61,7 @@
             this.btnCancelEditForm.Location = new System.Drawing.Point(802, 112);
             this.btnCancelEditForm.Name = "btnCancelEditForm";
             this.btnCancelEditForm.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelEditForm.TabIndex = 4;
+            this.btnCancelEditForm.TabIndex = 1;
             this.btnCancelEditForm.Text = "Cancel";
             this.btnCancelEditForm.UseVisualStyleBackColor = true;
             this.btnCancelEditForm.Click += new System.EventHandler(this.btnCancelEditForm_Click);
@@ -129,7 +129,7 @@
             this.textBoxNamePaste.Location = new System.Drawing.Point(268, 28);
             this.textBoxNamePaste.Name = "textBoxNamePaste";
             this.textBoxNamePaste.Size = new System.Drawing.Size(291, 20);
-            this.textBoxNamePaste.TabIndex = 1;
+            this.textBoxNamePaste.TabIndex = 2;
             this.textBoxNamePaste.TextChanged += new System.EventHandler(this.textBoxNamePaste_TextChanged);
             this.textBoxNamePaste.Leave += new System.EventHandler(this.textBoxNamePaste_Leave);
             // 
