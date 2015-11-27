@@ -50,6 +50,7 @@
             this.ListBoxDataNames.Size = new System.Drawing.Size(121, 21);
             this.ListBoxDataNames.TabIndex = 1;
             this.ListBoxDataNames.SelectedIndexChanged += new System.EventHandler(this.ListBoxDataNames_SelectedIndexChanged);
+      
             // 
             // Form1
             // 

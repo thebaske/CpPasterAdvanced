@@ -143,5 +143,7 @@ namespace CpPasterAdvanced
         {
             Clipboard.SetText(DataFromDatabaseToList.SelectOneRecord(ListBoxDataNames.SelectedItem.ToString()));
         }
+
+        
     }
 }

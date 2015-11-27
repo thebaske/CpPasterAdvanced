@@ -81,5 +81,18 @@ namespace CpPasterAdvanced
         {
             textBoxNamePaste.BackColor = Color.White;
         }
+
+        private void textBoxNamePaste_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxNamePaste.Text) || string.IsNullOrWhiteSpace(textBoxNamePaste.Text))
+            {
+                MessageBox.Show("Please enter a name to add to database or select a record to delete");
+                textBoxNamePaste.BackColor = Color.Red;
+            }
+            if (ControlToDatabaseFunctions.SelectOneRecord(textBoxNamePaste.Text) == textBoxNamePaste.Text)
+            {
+                MessageBox.Show("the name must be unique");
+            }
+        }
     }
 }

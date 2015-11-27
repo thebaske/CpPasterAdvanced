@@ -131,6 +131,7 @@
             this.textBoxNamePaste.Size = new System.Drawing.Size(291, 20);
             this.textBoxNamePaste.TabIndex = 1;
             this.textBoxNamePaste.TextChanged += new System.EventHandler(this.textBoxNamePaste_TextChanged);
+            this.textBoxNamePaste.Leave += new System.EventHandler(this.textBoxNamePaste_Leave);
             // 
             // label2
             // 
