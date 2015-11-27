@@ -24,6 +24,7 @@ namespace CpPasterAdvanced
         //TODO: change the delete method to accept string from the grid.
         //TODO: Make delete button dissapear when nothing is selected/ or make it read delete parameter from the grid.
         //TODO: Make append/change function.
+        //TODO: Test github new master branch
 
         public void CountRecords()
         {
