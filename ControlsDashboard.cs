@@ -19,6 +19,7 @@ namespace CpPasterAdvanced
         SQLiteDataReader sqlite_datareader;
         
         //TODO: stil not saving next line
+        //TODO: Make check on focus lost for name field, must be unique
         
         public void CountRecords()
         {
@@ -41,7 +42,7 @@ namespace CpPasterAdvanced
         //pasteData( as actual data to be pasted from the clipboard)
         public void InsertIntoDb(string Name, string pasteData)
         {
-            string pasterTextData = SearchStringForNewLint(pasteData);
+            string pasterTextData = ReplaceNewlineWithCharacter(pasteData);
             StringBuilder commandString = new StringBuilder();
             commandString.Append(@"INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('" + @Name + "'," + "'" + pasterTextData + "');");
             sqlite_connection.Open();
@@ -52,35 +53,51 @@ namespace CpPasterAdvanced
             sqlite_connection.Close();
         }
 
-        private string SearchStringForNewLint(string searchNewLine)
+        public string ReplaceCharacterWithNewLine(string stringToNewLine)
         {
-            StringBuilder sqlStringWithNewLine = new StringBuilder();
-            string[] lettersToArray = new string[searchNewLine.Length];
-            int a = 0;
-            foreach (char letter in searchNewLine)
+            bool checker = false;
+            List<string> listOfLetters = new List<string>();
+            StringBuilder newLineStringInserted = new StringBuilder();
+            foreach (var letter in stringToNewLine)
             {
-                
-                lettersToArray[a] = letter.ToString();
-                a++;
-            }
-            for (int i = 0; i < lettersToArray.Length; i++)
-            {
-                if (lettersToArray[i] == "\n")
+                if (letter == '|')
                 {
-                    lettersToArray[i] = "'char(10)'";
-                    //for (int j = i+1;  j < lettersToArray.Length ;  j++)
-                    //{
-                    //    lettersToArray[j] = lettersToArray[j + 1];
-                        
-                    //}
+                    checker = true;
+                    listOfLetters.Add("\n");
+                    continue;
                 }
-                
+                listOfLetters.Add(letter.ToString());
             }
-            foreach (var arrayItem in lettersToArray)
+            foreach (var listItem in listOfLetters)
             {
-                sqlStringWithNewLine.Append(arrayItem);
+                newLineStringInserted.Append(listItem);
             }
-            return sqlStringWithNewLine.ToString();
+            if (!checker)
+            {
+                return stringToNewLine;
+            }
+            return newLineStringInserted.ToString();
+        }
+
+        private string ReplaceNewlineWithCharacter(string newLineToCharacter)
+        {
+            StringBuilder StringWithCharacterInsteadNewLine = new StringBuilder();
+            List<string> lettersToArray = new List<string>();
+            foreach (char letter in newLineToCharacter)
+            {
+                if (letter == '\n')
+                {
+                    lettersToArray.Add("|");
+                    continue;
+                }
+                lettersToArray.Add(letter.ToString());
+            }
+            
+            foreach (var listItem in lettersToArray)
+            {
+                StringWithCharacterInsteadNewLine.Append(listItem);
+            }
+            return StringWithCharacterInsteadNewLine.ToString();
         }
         //Returns Dictionary with two strings( button Name , and data to be pasted
         //From which we can populate any type of the control.
@@ -98,8 +115,7 @@ namespace CpPasterAdvanced
                 while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
                 {
                     string btnNameReader = sqlite_datareader.GetString(0);
-                    string pasterDataReader = sqlite_datareader.GetString(1);
-                    dataItems.Add(btnNameReader, pasterDataReader);
+                    dataItems.Add(btnNameReader, ReplaceCharacterWithNewLine(sqlite_datareader.GetString(1)));
                 }
             }
             catch (Exception)
@@ -132,8 +148,11 @@ namespace CpPasterAdvanced
 
                 MessageBox.Show("There is no such record!!");
             }
-            finally { sqlite_connection.Close(); }
-            return resultQuery;
+            finally
+            {
+                sqlite_connection.Close();
+            }
+            return ReplaceCharacterWithNewLine(resultQuery);
         }
        
         public void DeleteRecords(string Data)
