@@ -17,8 +17,15 @@ namespace CpPasterAdvanced
         private SQLiteConnection sqlite_connection = new SQLiteConnection("Data Source=PasterDatabase.db;Version=3;New=True;Compress=True;");
         private SQLiteCommand sqlite_command = new SQLiteCommand();
         SQLiteDataReader sqlite_datareader;
+        public int MaxNumber {
+            get
+            {
+                return _maxNumber;
+            }
+            
+        }
 
-
+        //TODO: Doesn't accept  single quote
         //TODO: improve focus lost checking
         //TODO: Consider making the database with unique index key!! so you can delete an item based on table selection/ or 
         //TODO: change the delete method to accept string from the grid.
@@ -43,8 +50,7 @@ namespace CpPasterAdvanced
                 _count++;
             }
         }
-        //Inserts records with provided btnName(as name for the button or list Item) and
-        //pasteData( as actual data to be pasted from the clipboard)
+
         public void InsertIntoDb(string Name, string pasteData)
         {
             string pasterTextData = ReplaceNewlineWithCharacter(pasteData);
@@ -53,7 +59,6 @@ namespace CpPasterAdvanced
             sqlite_connection.Open();
             SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
             sqlite_command.CommandText = commandString.ToString();
-            //"INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('btnName', 'Text 1111111');";
             sqlite_command.ExecuteNonQuery();
             sqlite_connection.Close();
         }
@@ -104,8 +109,6 @@ namespace CpPasterAdvanced
             }
             return StringWithCharacterInsteadNewLine.ToString();
         }
-        //Returns Dictionary with two strings( button Name , and data to be pasted
-        //From which we can populate any type of the control.
 
         public Dictionary<string,string> SelectRecords()
         {
@@ -117,7 +120,7 @@ namespace CpPasterAdvanced
             sqlite_datareader = sqlite_command.ExecuteReader();
             try
             {
-                while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                while (sqlite_datareader.Read())
                 {
                     string btnNameReader = sqlite_datareader.GetString(0);
                     dataItems.Add(btnNameReader, ReplaceCharacterWithNewLine(sqlite_datareader.GetString(1)));
@@ -143,7 +146,7 @@ namespace CpPasterAdvanced
             sqlite_datareader = sqlite_command.ExecuteReader();
             try
             {
-                while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                while (sqlite_datareader.Read())
                 {
                     resultQuery = sqlite_datareader.GetString(1);
                 }
