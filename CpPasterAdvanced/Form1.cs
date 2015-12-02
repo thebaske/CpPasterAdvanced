@@ -8,23 +8,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Finisar.SQLite;
+using System.Data.SQLite;
 
 namespace CpPasterAdvanced
 {
     public partial class Form1 : Form
     {
-        public static int top = 50;
+
+        ControlsDashboard DataFromDatabaseToList = new ControlsDashboard();
         public Form1()
         {
             
             InitializeComponent();
+            LoadDataToDropDownControl();
+
+        }
+
+        public void LoadDataToDropDownControl()
+        {
+            ListBoxDataNames.Items.Clear();
+            foreach (var DataName in DataFromDatabaseToList.SelectRecords())
+            {
+                ListBoxDataNames.Items.Add(DataName.Key.ToString());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             #region SQL Code for first time use
-            //// We use these three SQLite objects:
+            ////// We use these three SQLite objects:
 
             //SQLiteConnection sqlite_conn;
 
@@ -34,91 +46,104 @@ namespace CpPasterAdvanced
 
 
 
-            //// create a new database connection:
+            ////// create a new database connection:
 
-            //sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            //sqlite_conn = new SQLiteConnection("Data Source=PasterDatabase.db;Version=3;New=True;Compress=True;");
 
 
 
-            //// open the connection:
+            ////// open the connection:
 
             //sqlite_conn.Open();
 
 
 
-            //// create a new SQL command:
+            ////// create a new SQL command:
 
             //sqlite_cmd = sqlite_conn.CreateCommand();
 
 
 
-            //// Let the SQLiteCommand object know our SQL-Query:
+            ////// Let the SQLiteCommand object know our SQL-Query:
 
-            //sqlite_cmd.CommandText = "CREATE TABLE PasterData (id integer primary key, buttonName text character(20), dataToPaste BLOB);";
-
-
-
-            //// Now lets execute the SQL ;D
-
-            //sqlite_cmd.ExecuteNonQuery();
+            ////sqlite_cmd.CommandText = "CREATE TABLE PasterData ('id_name' TEXT PRIMARY KEY NOT NULL, 'dataToPaste' TEXT NOT NULL);";
 
 
 
-            //// Lets insert something into our new table:
+            ////// Now lets execute the SQL ;D
 
-            //sqlite_cmd.CommandText = "INSERT INTO PasterData (id, buttonName, dataToPaste) VALUES (1, 'Test', 'Text 1111111');";
-
-
-
-            //// And execute this again ;D
-
-            //sqlite_cmd.ExecuteNonQuery();
+            ////sqlite_cmd.ExecuteNonQuery();
 
 
+
+            ////// Lets insert something into our new table:
+
+            ////sqlite_cmd.CommandText = "INSERT INTO PasterData (id_name, dataToPaste) VALUES ('HiWorld', 'bonjourne');";
+
+
+
+            ////// And execute this again ;D
+
+            ////sqlite_cmd.ExecuteNonQuery();
 
 
 
 
-            //// But how do we read something out of our table ?
 
-            //// First lets build a SQL-Query again:
+
+            ////// But how do we read something out of our table ?
+
+            ////// First lets build a SQL-Query again:
 
             //sqlite_cmd.CommandText = "SELECT * FROM PasterData";
 
 
 
-            //// Now the SQLiteCommand object can give us a DataReader-Object:
+            ////// Now the SQLiteCommand object can give us a DataReader-Object:
 
             //sqlite_datareader = sqlite_cmd.ExecuteReader();
 
 
 
-            //// The SQLiteDataReader allows us to run through the result lines:
+            ////// The SQLiteDataReader allows us to run through the result lines:
 
             //while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
             //{
 
-            //    // Print out the content of the text field:
+            //    //    // Print out the content of the text field:
 
-            //    //System.Console.WriteLine( sqlite_datareader["text"] );
+            //    //    //System.Console.WriteLine( sqlite_datareader["text"] );
 
 
 
             //    string myreader = sqlite_datareader.GetString(0);
 
-            //    MessageBox.Show(myreader);
+            //MessageBox.Show(myreader);
 
             //}
 
-            //// We are ready, now lets cleanup and close our connection:
+            ////// We are ready, now lets cleanup and close our connection:
 
-            //sqlite_conn.Close(); 
+            ////sqlite_conn.Close();
             #endregion
 
             EditPasterForm epf = new EditPasterForm();
             epf.Show();
+            LoadDataToDropDownControl();
         }
-        
+        //Delete items
+        //private void buttonDeleteDropboxItem_Click(object sender, EventArgs e)
+        //{
+            
+            
 
+        //}
+
+        private void ListBoxDataNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Clipboard.SetText(DataFromDatabaseToList.SelectOneRecord(ListBoxDataNames.SelectedItem.ToString()));
+        }
+
+        
     }
 }

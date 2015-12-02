@@ -5,48 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Finisar.SQLite;
+using System.Data.SQLite;
 
 namespace CpPasterAdvanced
-{
+{//TODO: Make try catch blocks around critical areas, and solve the problem when inserting newline and slash!!! That is no good!!!
     public class ControlsDashboard
     {
         private static int _count = 0;
         private static int _maxNumber = 0;
         private static int _idNumber = _maxNumber + 1;
-
-        
-        SQLiteConnection sqlite_conn;
-
-        SQLiteCommand sqlite_cmd;
-
+        private SQLiteConnection sqlite_connection = new SQLiteConnection("Data Source=PasterDatabase.db;Version=3;New=True;Compress=True;");
+        private SQLiteCommand sqlite_command = new SQLiteCommand();
         SQLiteDataReader sqlite_datareader;
-
-
-
-        // create a new database connection:
-        public void ConnectionControl(string status)
-        {
-            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
-            switch (status)
+        public int MaxNumber {
+            get
             {
-                case "Open":
-                    sqlite_conn.Open();
-                    break;
-                case "Close":
-                    sqlite_conn.Close();
-                    break;
+                return _maxNumber;
             }
             
         }
-        //Counts the records in the database
+
+        //TODO: Doesn't accept  single quote
+        //TODO: improve focus lost checking
+        //TODO: Consider making the database with unique index key!! so you can delete an item based on table selection/ or 
+        //TODO: change the delete method to accept string from the grid.
+        //TODO: Make delete button dissapear when nothing is selected/ or make it read delete parameter from the grid.
+        //TODO: Make append/change function.
+        //TODO: Test github new master branch
+
         public void CountRecords()
         {
-            sqlite_cmd.CommandText = "SELECT * FROM PasterData";
-            ConnectionControl("Open");
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            string command = "SELECT * FROM PasterData";
+            sqlite_connection.Open();
+            SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
+            sqlite_command.CommandText = command;
+            sqlite_datareader = sqlite_command.ExecuteReader();
             while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
-            {     
+            {
                 string myreader = sqlite_datareader.GetString(0);
                 if (_maxNumber < Convert.ToInt32(myreader))
                 {
@@ -55,48 +50,128 @@ namespace CpPasterAdvanced
                 _count++;
             }
         }
-        //Inserts records with provided btnName(as name for the button or list Item) and
-        //pasteData( as actual data to be pasted from the clipboard)
-        public void InsertIntoDb(string btnName, string pasteData)
-        {
-            sqlite_cmd = sqlite_conn.CreateCommand();
 
-            // Lets insert something into our new table:
-            StringBuilder commandInsert = new StringBuilder();
-            commandInsert.Append("INSERT INTO PasterData (id, buttonName, dataToPaste) VALUES (" + _idNumber + "," + " '" + btnName + "'," + " '" + pasteData + "');");
-            sqlite_cmd.CommandText = commandInsert.ToString();
-            //"INSERT INTO PasterData (id, buttonName, dataToPaste) VALUES (1, 'btnName', 'Text 1111111');";
-            ConnectionControl("Open");
-            sqlite_cmd.ExecuteNonQuery();
-            ConnectionControl("Close");
+        public void InsertIntoDb(string Name, string pasteData)
+        {
+            string pasterTextData = ReplaceNewlineWithCharacter(pasteData);
+            StringBuilder commandString = new StringBuilder();
+            commandString.Append(@"INSERT INTO PasterData (id_Name, DataToPaste) VALUES ('" + @Name + "'," + "'" + pasterTextData + "');");
+            sqlite_connection.Open();
+            SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
+            sqlite_command.CommandText = commandString.ToString();
+            sqlite_command.ExecuteNonQuery();
+            sqlite_connection.Close();
         }
-        //Returns Dictionary with two strings( button Name , and data to be pasted
-        //From which we can populate any type of the control.
-        public Dictionary<string,string> SelectRecords(string btnName)
+
+        public string ReplaceCharacterWithNewLine(string stringToNewLine)
+        {
+            bool checker = false;
+            List<string> listOfLetters = new List<string>();
+            StringBuilder newLineStringInserted = new StringBuilder();
+            foreach (var letter in stringToNewLine)
+            {
+                if (letter == '|')
+                {
+                    checker = true;
+                    listOfLetters.Add("\n");
+                    continue;
+                }
+                listOfLetters.Add(letter.ToString());
+            }
+            foreach (var listItem in listOfLetters)
+            {
+                newLineStringInserted.Append(listItem);
+            }
+            if (!checker)
+            {
+                return stringToNewLine;
+            }
+            return newLineStringInserted.ToString();
+        }
+
+        private string ReplaceNewlineWithCharacter(string newLineToCharacter)
+        {
+            StringBuilder StringWithCharacterInsteadNewLine = new StringBuilder();
+            List<string> lettersToArray = new List<string>();
+            foreach (char letter in newLineToCharacter)
+            {
+                if (letter == '\n')
+                {
+                    lettersToArray.Add("|");
+                    continue;
+                }
+                lettersToArray.Add(letter.ToString());
+            }
+            
+            foreach (var listItem in lettersToArray)
+            {
+                StringWithCharacterInsteadNewLine.Append(listItem);
+            }
+            return StringWithCharacterInsteadNewLine.ToString();
+        }
+
+        public Dictionary<string,string> SelectRecords()
         {
             Dictionary<string, string> dataItems = new Dictionary<string, string>();
-            sqlite_cmd.CommandText = "SELECT * FROM PasterData";
-            ConnectionControl("Open");
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
-            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            string command = "SELECT * FROM PasterData";
+            sqlite_connection.Open();
+            SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
+            sqlite_command.CommandText = command;
+            sqlite_datareader = sqlite_command.ExecuteReader();
+            try
             {
-                string btnNameReader = sqlite_datareader.GetString(1);
-                string pasterDataReader = sqlite_datareader.GetString(2);
-                dataItems.Add(btnNameReader, pasterDataReader);
+                while (sqlite_datareader.Read())
+                {
+                    string btnNameReader = sqlite_datareader.GetString(0);
+                    dataItems.Add(btnNameReader, ReplaceCharacterWithNewLine(sqlite_datareader.GetString(1)));
+                }
             }
-            ConnectionControl("Close");
+            catch (Exception)
+            {
+
+                MessageBox.Show("The database is empty");
+            }
+            finally { sqlite_connection.Close(); }
             return dataItems;
         }
-        //Selects all records from database
-        public SqlDataReader
-        //Deletes provided record form the database
-        public void DeleteRecords(string btnName)
+
+        public string SelectOneRecord(string queryWord)
+        {
+            string resultQuery = "";
+            StringBuilder commandString = new StringBuilder();
+            commandString.Append("SELECT * FROM PasterData WHERE id_Name = '" + queryWord + "';");
+            sqlite_connection.Open();
+            SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
+            sqlite_command.CommandText = commandString.ToString();
+            sqlite_datareader = sqlite_command.ExecuteReader();
+            try
+            {
+                while (sqlite_datareader.Read())
+                {
+                    resultQuery = sqlite_datareader.GetString(1);
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("There is no such record!!");
+            }
+            finally
+            {
+                sqlite_connection.Close();
+            }
+            return ReplaceCharacterWithNewLine(resultQuery);
+        }
+       
+        public void DeleteRecords(string Data)
         {
             StringBuilder deleteString = new StringBuilder();
-            deleteString.Append("DELETE FROM PasterData WHERE buttonName = '"+ btnName +"';");
-            sqlite_cmd.CommandText = deleteString.ToString();
-            ConnectionControl("Open");
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            deleteString.Append("DELETE FROM PasterData WHERE DataToPaste = '" + Data + "';");
+            sqlite_connection.Open();
+            SQLiteCommand sqlite_command = sqlite_connection.CreateCommand();
+            sqlite_command.CommandText = deleteString.ToString();
+            sqlite_datareader = sqlite_command.ExecuteReader();
+            sqlite_connection.Close();
         }
     }
 }
